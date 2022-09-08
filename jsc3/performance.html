@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p><span id="used"></span> GB / <span id="total"></span> GB</p>
+
+    <script src="https://mozilla.github.io/nunjucks/files/nunjucks.min.js"></script>
+    <script>
+        const span_used = document.querySelector("#used")
+        const span_total = document.querySelector("#total")
+        function get_hdds() {
+            const xhr = new XMLHttpRequest()
+            xhr.open("GET", "http://localhost:9000/api/v1/hdd")
+            xhr.send()
+            xhr.addEventListener("load", () => {
+                if(xhr.status == 200 && xhr.readyState == 4) {
+                    const response_json = JSON.parse(xhr.responseText)
+                    console.log(response_json)
+                }
+            })
+        }
+        function get_memory() {
+            const xhr = new XMLHttpRequest()
+            xhr.open("GET", "http://localhost:9000/api/v1/ram")
+            xhr.send()
+            xhr.addEventListener("load", () => {
+                if(xhr.status == 200 && xhr.readyState == 4) {
+                    const response_json = JSON.parse(xhr.responseText)
+                    span_used.innerHTML = response_json.memory.used 
+                    span_total.innerHTML = response_json.memory.total
+                }
+            })
+        }
+
+        setInterval(() => {
+            get_memory()
+        }, 2000)
+    </script>
+</body>
+</html>

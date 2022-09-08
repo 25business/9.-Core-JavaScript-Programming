@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse Events</title>
+    <style>
+        #square {
+            width: 400px;
+            height: 400px;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        x: <span id="x"></span>
+        y: <span id="y"></span>
+    </p>
+    <div id="square"></div>
+    <script>
+        const div_square = document.querySelector("#square")
+        const span_x = document.querySelector("#x")
+        const span_y = document.querySelector("#y")
+        div_square.addEventListener("mouseenter", () => {
+            div_square.style.backgroundColor = "violet"
+        })
+        div_square.addEventListener("mouseleave", () => {
+            div_square.style.backgroundColor = "pink"
+        })
+        div_square.addEventListener("mousemove", (eventObject) => {
+            const ds_x = div_square.offsetLeft
+            const ds_y = div_square.offsetTop
+            console.log(ds_x, ds_y)
+            span_x.innerHTML = eventObject.x - ds_x
+            span_y.innerHTML = eventObject.y - ds_y
+        })
+
+        // dblclick - Random boja
+        // rgb(0,128,255) - rnd*256 sa floor
+        div_square.addEventListener("dblclick", () => {
+            const r = Math.floor(Math.random() * 256)
+            const g = Math.floor(Math.random() * 256)
+            const b = Math.floor(Math.random() * 256)
+            div_square.style.backgroundColor = `rgb(${r},${g},${b})`
+        })
+        
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        function ukupna_cena(cena, porez) {
+            return cena + (cena * porez / 100);
+        }
+        function ukupna_cena_2(roba, porez) {
+            return roba.oporezivost == true ?
+            roba.cena + ( roba.cena * porez / 100) : 
+            roba.cena;
+        }
+        function zamena(niz) {
+            const prvi = niz.shift();
+            const poslednji = niz.pop();
+            niz.unshift(poslednji);
+            niz.push(prvi);
+        }
+
+        const roba = {
+            "naziv": "Proizvod",
+            "cena": 100,
+            "oporezivost" : true   
+        };
+        console.log(ukupna_cena(100,20));
+        console.log(ukupna_cena_2(roba,20));
+
+        niz = [1,2,3,4,5]
+        console.log(niz)
+        zamena(niz)
+        console.log(niz)
+    </script>
+</body>
+</html>

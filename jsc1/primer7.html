@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function ispis_string(osoba) {
+            return "Ime: " + osoba.ime + "\n" +
+            "Prezime: " + osoba.prezime + "\n" +
+            "Godine: " + osoba.godine + "\n" +
+            "E-mail: " + osoba.email + "\n" + 
+            "Adresa:\n" + 
+            "\tUlica: " + osoba.adresa.ulica + "\n" +
+            "\tBroj: " + osoba.adresa.broj + "\n" +
+            "\tGrad: " + osoba.adresa.grad + "\n" + 
+            "\tPostanski broj: " + osoba.adresa.postanski_broj 
+
+        }
+
+        const osoba = {
+            "ime" : "Petar",
+            "prezime" : "Peric",
+            "godine": 25,
+            "email": "petar.peric@gmail.com",
+            "adresa": {
+                "ulica": "Cara Dusana",
+                "broj": 34,
+                "grad": "Beograd",
+                "postanski_broj": 11010
+            } 
+        }
+
+        console.log(ispis_string(osoba))
+    </script>
+</body>
+</html>

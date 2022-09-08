@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jikan API</title>
+    <style>
+        * { font-family: "Segoe UI", "Verdana", "Lato", sans-serif; }
+    </style>
+</head>
+<body>
+    <p>Search: <input id="criteria" type="text" /></p>
+    <p>Format: <select id="format">
+        <option value="all" selected>All</option>
+        <option value="tv">TV</option>
+        <option value="movie">Movie</option>
+        <option value="ova">OVA</option>
+        <option value="special">Special</option>
+        <option value="ona">ONA</option>
+        <option value="music">Music</option>
+    </select></p>
+    <p><button id="search">Search</button></p>
+    <div id="results"></div>
+
+    <script src="https://mozilla.github.io/nunjucks/files/nunjucks.min.js"></script>
+    <script>
+        const div_results = document.querySelector("#results")
+        const input_criteria = document.querySelector("#criteria")
+        const button_search = document.querySelector("#search")
+        const select_format = document.querySelector("#format")
+        nunjucks.configure("./templates", { autoescape: true })
+
+        function search_for(criteria) {
+            const xhr = new XMLHttpRequest();
+
+            let query_url = "https://api.jikan.moe/v4/anime?sfw=true&q=" + criteria['phrase']
+            if(criteria['type'] != "all") {
+                query_url += "&type=" + criteria['type']
+            }
+
+            xhr.open("GET", query_url)
+            xhr.send()
+
+            xhr.addEventListener("load", () => {
+
+                if(xhr.status == 200 && xhr.readyState == 4) {
+                    const response_json = JSON.parse(xhr.responseText)
+
+                    if(response_json.pagination.items.count != 0) {
+                        div_results.innerHTML = nunjucks.render("results.html", 
+                        { results: response_json.data })
+                    } else {
+                        div_results.innerHTML = nunjucks.render("noresults.html")
+                    }
+                }
+
+            })
+        }
+
+        button_search.addEventListener("click", () => {
+            let criteria = {}
+            criteria['phrase'] = input_criteria.value 
+            criteria['type'] = select_format.value
+            search_for(criteria)
+        })
+
+        
+    </script>
+</body>
+</html>

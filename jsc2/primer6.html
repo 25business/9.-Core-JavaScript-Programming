@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #letters, #word {
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .wrong { color: red; margin-right: 8px; }
+        .correct { color: darkgreen; margin-right: 8px; }
+    </style>
+</head>
+<body>
+    <div>
+        <img width="200" id="hangman" src="./images/h1.png" />
+    </div>
+    <div id="word">       
+    </div>
+    <div>
+        <div><b>Letters:</b> 
+            <div id="letters"></div>
+        </div>
+    </div>
+    <div>
+        <input id="letter" type="text" maxlength="1" />
+    </div>
+
+    <script>
+        // https://random-words-api.vercel.app/word
+        const words = ["opalotype", "gazar", "noctilucent",
+        "tamis", "loculus", "rhizophagous", "wherewith",
+        "wase", "vaalhaai", "wapentake", "mewling"];
+        const img_hangman = document.querySelector("#hangman")
+        const div_word = document.querySelector("#word")
+        const div_letters = document.querySelector("#letters")
+        const input_letter = document.querySelector("#letter")
+        const display_word = []
+        let attempt = 1
+        let chosen_word = ""
+
+        function choose_word() {
+            i = Math.floor(Math.random() * words.length)
+            return words[i]
+        }
+
+        function form_display_word() {
+            chosen_word = choose_word()
+            console.log(chosen_word)
+            for(let i = 0; i < chosen_word.length; i++)
+                display_word.push("_")
+                div_word.innerHTML = display_word.join(" ")
+        }
+
+        form_display_word()
+
+        input_letter.addEventListener("keydown", (eventObject) => {
+            if(attempt == 8) {
+                alert("You have lost the game!")
+                return;
+            }
+
+            if(eventObject.keyCode >= 65 && eventObject.keyCode <= 97) {
+                const enteredKey = eventObject.key
+                if(!chosen_word.toLowerCase().includes(enteredKey)) {
+                    attempt++ 
+                    img_hangman.src = "./images/h" + attempt + ".png"
+                    div_letters.innerHTML += `<span class="wrong">${enteredKey}</span>`
+                } else {
+                    for(let i = 0; i < chosen_word.length; i++) {
+                        if(enteredKey == chosen_word.charAt(i)) {
+                            display_word[i] = enteredKey
+                        } 
+                    }
+                    div_letters.innerHTML += `<span class="correct">${enteredKey}</span>`
+                    div_word.innerHTML = display_word.join(" ")
+                    
+                }
+            }
+            input_letter.value = ""
+        })
+
+        input_letter.addEventListener("keyup", (eventObject) => { 
+            if(!display_word.join("").includes("_")) {
+                        alert("You have won the game!")
+            }
+        })
+
+
+    </script>
+
+
+
+
+</body>
+</html>

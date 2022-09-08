@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Kalkulator
+    Dva inputa za dva broja
+    cetiri dugmeta za operacije +,-,*,/
+    paragraf za ispis rezultata
+    Number()
+    -->
+    <p>x: <input id="x" type="number"></p>
+    <p>y: <input id="y" type="number"></p>
+    <p>
+        <button id="plus">+</button>
+        <button id="minus">-</button>
+        <button id="multiply">*</button>
+        <button id="divide">/</button>
+    </p>
+    <p>Result: <span id="result"></span></p>
+    <script>
+        const input_x = document.querySelector("#x")
+        const input_y = document.querySelector("#y")
+        const button_plus = document.querySelector("#plus")
+        const button_minus = document.querySelector("#minus")
+        const button_multiply = document.querySelector("#multiply")
+        const button_divide = document.querySelector("#divide")
+        const span_result = document.querySelector("#result")
+
+        button_plus.addEventListener("click", () => {
+            const x = Number(input_x.value)
+            const y = Number(input_y.value)
+            span_result.innerHTML = x + y
+        })
+        button_minus.addEventListener("click", () => {
+            const x = Number(input_x.value)
+            const y = Number(input_y.value)
+            span_result.innerHTML = x - y
+        })
+        button_multiply.addEventListener("click", () => {
+            const x = Number(input_x.value)
+            const y = Number(input_y.value)
+            span_result.innerHTML = x * y
+        })
+        button_divide.addEventListener("click", () => {
+            const x = Number(input_x.value)
+            const y = Number(input_y.value)
+            span_result.innerHTML = x / y
+        })
+
+    </script>
+</body>
+</html>

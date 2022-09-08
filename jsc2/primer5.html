@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="checkbox" value="1"> 1
+    <input type="checkbox" value="2"> 2
+    <input type="checkbox" value="3"> 3
+    <input type="checkbox" value="4"> 4
+    <input type="checkbox" value="5"> 5
+    <input type="checkbox" value="6"> 6
+
+    <p><button id="checker">Get checked</button></p>
+    <p>Values checked: <span id="output"></span></p>
+    <p>Values checked from checkbox: <span id="out2"></span></p>
+    <script>
+        const button_checker = document.querySelector("#checker")
+        const span_output = document.querySelector("#output")
+
+        button_checker.addEventListener("click", () => {
+            const cboxs_checked = document.querySelectorAll("input:checked")
+            
+            span_output.innerHTML = ""
+            for(let cbox of cboxs_checked) {
+                span_output.innerHTML += cbox.value + " "
+            }
+        })
+
+        const checkboxes = document.querySelectorAll("[type='checkbox']")
+        const span_out2 = document.querySelector("#out2")
+        const array_values = []
+        for(let checkbox of checkboxes) {
+            checkbox.addEventListener("change", () => {
+                if(checkbox.checked == true) {
+                    array_values.push(checkbox.value)
+                } else {
+                    for(let i = 0; i < array_values.length; i++) {
+                        if(array_values[i] == checkbox.value) {
+                            array_values.splice(i,1);
+                            break;
+                        }
+                    }
+                }
+                span_out2.innerHTML = ""
+                for(let el of array_values) {
+                    span_out2.innerHTML += el + " "
+                }
+            })
+        }
+    </script>
+</body>
+</html>

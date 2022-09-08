@@ -1,0 +1,40 @@
+<style>
+    .results {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .result {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        background: #cecece;
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+
+    .result h1 {
+        font-size: 1.25rem;
+        margin: 0 0 0.5rem 0;
+    }
+    .result h2 {
+        font-size: 1.1rem;
+        margin: 0 0 0.75rem 0;
+    }
+    .result img {
+        max-width: 100%;
+        max-height: 15rem;
+    }
+</style>
+<div class="results">
+    {% for record in results %}
+    <div class="result">
+        <h1>{{ record.title }}</h1>
+        <h2>{{ record.title_japanese }}</h2>
+        <p><b>Type:</b> {{record.type}}</p>
+        <img src="{{record.images.webp.image_url}}" />
+    </div>
+    {% endfor %}
+</div>

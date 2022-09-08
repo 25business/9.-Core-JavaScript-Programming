@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li><input id="i_text" type="text" /></li>
+        <li><input id="i_num" type="number"></li>
+        <li><input id="i_date" type="date"></li>
+        <li><input id="i_color" type="color"></li>
+    </ul>
+    <p><button id="show_values">Print values</button></p>
+    <p id="output"></p>
+    <script>
+        const input_text = document.querySelector("#i_text");
+        const input_num = document.querySelector("#i_num");
+        const input_date = document.querySelector("#i_date");
+        const input_color = document.querySelector("#i_color");
+        const button_show = document.querySelector("#show_values");
+        const p_output = document.querySelector("#output")
+
+        button_show.addEventListener("click", () => {
+            p_output.innerHTML = `
+            Text: ${input_text.value} <br/>
+            Number: ${input_num.value} <br/>
+            Date: ${input_date.value} <br/>
+            Color: ${input_color.value}
+            `;
+        })
+    </script>
+</body>
+</html>
